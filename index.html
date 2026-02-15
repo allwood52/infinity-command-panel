@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infinity Order Panel</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Infinity Order Panel</h1>
+    <button id="mode-toggle">Switch to Game Mode</button>
+  </header>
+
+  <section id="orders">
+    <h2>Order Pools</h2>
+
+    <div id="regular-controls" class="controls">
+        <span>Regular Orders</span>
+        <div class="button-group">
+            <button class="add" data-type="Regular">+</button>
+            <button class="remove" data-type="Regular">–</button>
+        </div>
+    </div>
+
+    <div id="regular-groups"></div>
+
+    <h3>Other Orders</h3>
+
+    <div id="other-controls" class="controls"></div>
+    <div id="other-orders"></div>
+  </section>
+
+  <section id="objectives">
+  <h2>Objective Scoring</h2>
+
+  <div class="score-row">
+  <span>Primary Objectives</span>
+  <div class="button-group">
+    <button class="score-add" data-type="primary">+</button>
+    <button class="score-remove" data-type="primary">–</button>
+  </div>
+  <span id="score-primary">0</span>
+</div>
+
+<div class="score-row">
+  <span>Classified Objectives</span>
+  <div class="button-group">
+    <button class="score-add" data-type="classified">+</button>
+    <button class="score-remove" data-type="classified">–</button>
+  </div>
+  <span id="score-classified">0</span>
+</div>
+</section>
+
+  <section id="fireteam">
+    <h2>Fireteam Bonuses</h2>
+    <select id="fireteam-select">
+      <option value="0">No Fireteam</option>
+      <option value="1">Duo</option>
+      <option value="2">Haris</option>
+      <option value="3">Triad</option>
+      <option value="4">Core (4 members)</option>
+      <option value="5">Core (5 members)</option>
+    </select>
+    <div id="fireteam-output"></div>
+  </section>
+
+  <section id="metachem">
+    <h2>Metachemistry</h2>
+    <select id="meta-select"></select>
+    <button id="meta-random">Random</button>
+  </section>
+
+  <button id="reset">Reset All</button>
+
+  <script src="meta-table.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

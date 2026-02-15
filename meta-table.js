@@ -1,0 +1,22 @@
+const metaTable = {
+  1: "Super-Jump",
+  2: "Climbing+",
+  3: "Regeneration",
+  4: "Berserk",
+  5: "Mimetism -3",
+  6: "Mimetism -6",
+  7: "Total Immunity",
+  8: "Dogged",
+  9: "Courage",
+  10: "6-4 Move",
+  11: "8-4 Move",
+  12: "Arm +3",
+  13: "PH +3",
+  14: "CC +6",
+  15: "BS +3",
+  16: "Shock Immunity",
+  17: "Bioimmunity",
+  18: "Stealth",
+  19: "Martial Arts L2",
+  20: "Martial Arts L3"
+};
