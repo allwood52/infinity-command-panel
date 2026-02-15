@@ -11,6 +11,27 @@ let gameMode = false;
 // Persistent regular group structure
 let regularGroups = [];
 
+function askNumber(title) {
+  return new Promise(resolve => {
+    const modal = document.getElementById("order-modal");
+    const input = document.getElementById("modal-input");
+    const titleEl = document.getElementById("modal-title");
+    const ok = document.getElementById("modal-ok");
+
+    titleEl.textContent = title;
+    input.value = "";
+    modal.classList.remove("hidden");
+
+    // Allow DOM to render before focusing
+    setTimeout(() => input.focus(), 50);
+
+    ok.onclick = () => {
+      modal.classList.add("hidden");
+      resolve(parseInt(input.value) || 0);
+    };
+  });
+}
+
 // ICON HELPER
 function createOrderIcon(type) {
   const img = document.createElement("img");
@@ -35,12 +56,12 @@ function saveCounts() {
 }
 
 // SETUP MODE PROMPTS
-function setupCounts() {
-  counts["Regular"] = parseInt(prompt("How many Regular orders?")) || 0;
+async function setupCounts() {
+  counts["Regular"] = await askNumber("How many Regular orders?");
 
-  otherOrderTypes.forEach(type => {
-    counts[type] = parseInt(prompt(`How many ${type} orders?`)) || 0;
-  });
+  for (const type of otherOrderTypes) {
+    counts[type] = await askNumber(`How many ${type} orders?`);
+  }
 
   // Rebuild groups fresh
   regularGroups = [];
@@ -54,12 +75,15 @@ function setupCounts() {
 }
 
 // GAME MODE TOGGLE
-document.getElementById("mode-toggle").addEventListener("click", () => {
+document.getElementById("mode-toggle").addEventListener("click", async () => {
   gameMode = !gameMode;
   document.getElementById("mode-toggle").textContent =
     gameMode ? "Switch to Setup Mode" : "Switch to Game Mode";
 
-  if (!gameMode) setupCounts();
+  if (!gameMode) {
+    await setupCounts();
+  }
+
   renderAll();
 });
 
@@ -330,7 +354,7 @@ function createToggleSwitch(id) {
 }
 
 // RESET
-document.getElementById("reset").onclick = () => {
+document.getElementById("reset").onclick = async () => {
   localStorage.removeItem("orderCounts");
   localStorage.removeItem("regularGroups");
   localStorage.removeItem("scores");
@@ -339,7 +363,7 @@ document.getElementById("reset").onclick = () => {
   scores = { primary: 0, classified: 0 };
   regularGroups = [];
 
-  setupCounts();
+  await setupCounts();
   renderAll();
 };
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Infinity Order Panel</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=2" />
   <link rel="manifest" href="manifest.json?v=2" />
 
   <script>
@@ -83,7 +83,15 @@
 
   <button id="reset">Reset All</button>
 
+  <div id="order-modal" class="modal hidden">
+    <div class="modal-content">
+        <h3 id="modal-title"></h3>
+        <input id="modal-input" type="number" inputmode="numeric">
+        <button id="modal-ok">OK</button>
+    </div>
+  </div>
+
   <script src="meta-table.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>
